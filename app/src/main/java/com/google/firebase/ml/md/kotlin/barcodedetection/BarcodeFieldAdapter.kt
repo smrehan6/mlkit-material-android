@@ -26,7 +26,7 @@ import com.google.firebase.ml.md.kotlin.barcodedetection.BarcodeFieldAdapter.Bar
 
 /** Presents a list of field info in the detected barcode.  */
 internal class BarcodeFieldAdapter(private val barcodeFieldList: List<BarcodeField>) :
-    RecyclerView.Adapter<BarcodeFieldViewHolder>() {
+        RecyclerView.Adapter<BarcodeFieldViewHolder>() {
 
     internal class BarcodeFieldViewHolder private constructor(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -48,11 +48,11 @@ internal class BarcodeFieldAdapter(private val barcodeFieldList: List<BarcodeFie
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BarcodeFieldViewHolder =
-        BarcodeFieldViewHolder.create(parent)
+            BarcodeFieldViewHolder.create(parent)
 
     override fun onBindViewHolder(holder: BarcodeFieldViewHolder, position: Int) =
-        holder.bindBarcodeField(barcodeFieldList[position])
+            holder.bindBarcodeField(barcodeFieldList[position])
 
     override fun getItemCount(): Int =
-        barcodeFieldList.size
+            barcodeFieldList.size
 }

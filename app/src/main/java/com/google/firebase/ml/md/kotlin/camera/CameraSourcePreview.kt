@@ -110,7 +110,7 @@ class CameraSourcePreview(context: Context, attrs: AttributeSet) : FrameLayout(c
                     }
                     else -> {
                         childView.layout(
-                            0, -excessLenInHalf, layoutWidth, layoutHeight + excessLenInHalf)
+                                0, -excessLenInHalf, layoutWidth, layoutHeight + excessLenInHalf)
                     }
                 }
             }

@@ -30,17 +30,17 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.chip.Chip
 import com.google.common.base.Objects
 import com.google.firebase.ml.md.R
-import com.google.firebase.ml.md.kotlin.camera.GraphicOverlay
-import com.google.firebase.ml.md.kotlin.camera.WorkflowModel
-import com.google.firebase.ml.md.kotlin.camera.WorkflowModel.WorkflowState
 import com.google.firebase.ml.md.kotlin.barcodedetection.BarcodeField
 import com.google.firebase.ml.md.kotlin.barcodedetection.BarcodeProcessor
 import com.google.firebase.ml.md.kotlin.barcodedetection.BarcodeResultFragment
 import com.google.firebase.ml.md.kotlin.camera.CameraSource
 import com.google.firebase.ml.md.kotlin.camera.CameraSourcePreview
+import com.google.firebase.ml.md.kotlin.camera.GraphicOverlay
+import com.google.firebase.ml.md.kotlin.camera.WorkflowModel
+import com.google.firebase.ml.md.kotlin.camera.WorkflowModel.WorkflowState
 import com.google.firebase.ml.md.kotlin.settings.SettingsActivity
 import java.io.IOException
-import java.util.ArrayList
+import java.util.*
 
 /** Demonstrates the barcode scanning workflow using camera preview.  */
 class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
@@ -57,8 +57,8 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_live_barcode_kotlin)
+        // TODO camera permission
         preview = findViewById(R.id.camera_preview)
         graphicOverlay = findViewById<GraphicOverlay>(R.id.camera_preview_graphic_overlay).apply {
             setOnClickListener(this@LiveBarcodeScanningActivity)
@@ -67,9 +67,9 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
 
         promptChip = findViewById(R.id.bottom_prompt_chip)
         promptChipAnimator =
-            (AnimatorInflater.loadAnimator(this, R.animator.bottom_prompt_chip_enter) as AnimatorSet).apply {
-                setTarget(promptChip)
-            }
+                (AnimatorInflater.loadAnimator(this, R.animator.bottom_prompt_chip_enter) as AnimatorSet).apply {
+                    setTarget(promptChip)
+                }
 
         findViewById<View>(R.id.close_button).setOnClickListener(this)
         flashButton = findViewById<View>(R.id.flash_button).apply {

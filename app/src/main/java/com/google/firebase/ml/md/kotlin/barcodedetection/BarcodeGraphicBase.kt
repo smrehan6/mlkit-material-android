@@ -16,18 +16,12 @@
 
 package com.google.firebase.ml.md.kotlin.barcodedetection
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.CornerPathEffect
-import android.graphics.Paint
+import android.graphics.*
 import android.graphics.Paint.Style
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffXfermode
-import android.graphics.RectF
 import androidx.core.content.ContextCompat
+import com.google.firebase.ml.md.R
 import com.google.firebase.ml.md.kotlin.camera.GraphicOverlay
 import com.google.firebase.ml.md.kotlin.camera.GraphicOverlay.Graphic
-import com.google.firebase.ml.md.R
 import com.google.firebase.ml.md.kotlin.settings.PreferenceUtils
 
 internal abstract class BarcodeGraphicBase(overlay: GraphicOverlay) : Graphic(overlay) {
@@ -48,7 +42,7 @@ internal abstract class BarcodeGraphicBase(overlay: GraphicOverlay) : Graphic(ov
     }
 
     val boxCornerRadius: Float =
-        context.resources.getDimensionPixelOffset(R.dimen.barcode_reticle_corner_radius).toFloat()
+            context.resources.getDimensionPixelOffset(R.dimen.barcode_reticle_corner_radius).toFloat()
 
     val pathPaint: Paint = Paint().apply {
         color = Color.WHITE

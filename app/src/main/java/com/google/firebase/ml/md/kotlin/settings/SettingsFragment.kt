@@ -20,10 +20,10 @@ import android.hardware.Camera
 import android.os.Bundle
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
-import com.google.firebase.ml.md.kotlin.camera.CameraSource
 import com.google.firebase.ml.md.R
 import com.google.firebase.ml.md.kotlin.Utils
-import java.util.HashMap
+import com.google.firebase.ml.md.kotlin.camera.CameraSource
+import java.util.*
 
 /** Configures App settings.  */
 class SettingsFragment : PreferenceFragmentCompat() {

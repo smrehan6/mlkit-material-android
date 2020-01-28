@@ -21,16 +21,16 @@ import android.graphics.Paint
 import android.graphics.Paint.Style
 import android.graphics.RectF
 import androidx.core.content.ContextCompat
-import com.google.firebase.ml.md.kotlin.camera.GraphicOverlay
 import com.google.firebase.ml.md.R
 import com.google.firebase.ml.md.kotlin.camera.CameraReticleAnimator
+import com.google.firebase.ml.md.kotlin.camera.GraphicOverlay
 
 /**
  * A camera reticle that locates at the center of canvas to indicate the system is active but has
  * not detected a barcode yet.
  */
 internal class BarcodeReticleGraphic(overlay: GraphicOverlay, private val animator: CameraReticleAnimator) :
-    BarcodeGraphicBase(overlay) {
+        BarcodeGraphicBase(overlay) {
 
     private val ripplePaint: Paint
     private val rippleSizeOffset: Int

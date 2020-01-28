@@ -23,7 +23,8 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import com.google.firebase.ml.md.kotlin.Utils
-import java.util.ArrayList
+import com.google.firebase.ml.md.kotlin.camera.GraphicOverlay.Graphic
+import java.util.*
 
 /**
  * A view which renders a series of custom graphics to be overlaid on top of an associated preview

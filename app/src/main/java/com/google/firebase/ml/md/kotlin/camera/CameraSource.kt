@@ -32,7 +32,7 @@ import com.google.firebase.ml.md.kotlin.settings.PreferenceUtils
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata
 import java.io.IOException
 import java.nio.ByteBuffer
-import java.util.IdentityHashMap
+import java.util.*
 import kotlin.math.abs
 import kotlin.math.ceil
 
@@ -291,7 +291,7 @@ class CameraSource(private val graphicOverlay: GraphicOverlay) {
         // should guarantee that there will be an array to work with.
         val byteArray = ByteArray(bufferSize)
         val byteBuffer = ByteBuffer.wrap(byteArray)
-        check(!(!byteBuffer.hasArray() || !byteBuffer.array()!!.contentEquals(byteArray))) {
+        check(!(!byteBuffer.hasArray() || !byteBuffer.array().contentEquals(byteArray))) {
             // This should never happen. If it does, then we wouldn't be passing the preview content to
             // the underlying detector later.
             "Failed to create valid buffer for camera source."

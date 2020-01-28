@@ -21,36 +21,36 @@ import android.util.Log
 import androidx.annotation.MainThread
 import com.google.android.gms.tasks.Task
 import com.google.firebase.ml.md.kotlin.camera.CameraReticleAnimator
-import com.google.firebase.ml.vision.FirebaseVision
-import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
-import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.md.kotlin.camera.FrameProcessorBase
 import com.google.firebase.ml.md.kotlin.camera.GraphicOverlay
 import com.google.firebase.ml.md.kotlin.camera.WorkflowModel
 import com.google.firebase.ml.md.kotlin.camera.WorkflowModel.WorkflowState
-import com.google.firebase.ml.md.kotlin.camera.FrameProcessorBase
 import com.google.firebase.ml.md.kotlin.settings.PreferenceUtils
+import com.google.firebase.ml.vision.FirebaseVision
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
+import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import java.io.IOException
 
 /** A processor to run the barcode detector.  */
 class BarcodeProcessor(graphicOverlay: GraphicOverlay, private val workflowModel: WorkflowModel) :
-    FrameProcessorBase<List<FirebaseVisionBarcode>>() {
+        FrameProcessorBase<List<FirebaseVisionBarcode>>() {
 
     private val detector = FirebaseVision.getInstance().visionBarcodeDetector
     private val cameraReticleAnimator: CameraReticleAnimator = CameraReticleAnimator(graphicOverlay)
 
     override fun detectInImage(image: FirebaseVisionImage): Task<List<FirebaseVisionBarcode>> =
-        detector.detectInImage(image)
+            detector.detectInImage(image)
 
     @MainThread
     override fun onSuccess(
-        image: FirebaseVisionImage,
-        results: List<FirebaseVisionBarcode>,
-        graphicOverlay: GraphicOverlay
+            image: FirebaseVisionImage,
+            results: List<FirebaseVisionBarcode>,
+            graphicOverlay: GraphicOverlay
     ) {
 
         if (!workflowModel.isCameraLive) return
 
-        Log.d(TAG, "Barcode result size: ${results.size}")
+        Log.i(TAG, "TOTAL RESULTS: ${results.size}")
 
         // Picks the barcode, if exists, that covers the center of graphic overlay.
 

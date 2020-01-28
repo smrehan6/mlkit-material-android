@@ -43,9 +43,9 @@ abstract class FrameProcessorBase<T> : FrameProcessor {
 
     @Synchronized
     override fun process(
-        data: ByteBuffer,
-        frameMetadata: FrameMetadata,
-        graphicOverlay: GraphicOverlay
+            data: ByteBuffer,
+            frameMetadata: FrameMetadata,
+            graphicOverlay: GraphicOverlay
     ) {
         latestFrame = data
         latestFrameMetaData = frameMetadata
@@ -83,9 +83,9 @@ abstract class FrameProcessorBase<T> : FrameProcessor {
 
     /** Be called when the detection succeeds.  */
     protected abstract fun onSuccess(
-        image: FirebaseVisionImage,
-        results: T,
-        graphicOverlay: GraphicOverlay
+            image: FirebaseVisionImage,
+            results: T,
+            graphicOverlay: GraphicOverlay
     )
 
     protected abstract fun onFailure(e: Exception)
