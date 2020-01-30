@@ -16,15 +16,20 @@
 
 package com.google.firebase.ml.md.kotlin
 
+import android.Manifest
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.hardware.Camera
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.chip.Chip
@@ -42,6 +47,9 @@ import com.google.firebase.ml.md.kotlin.settings.SettingsActivity
 import java.io.IOException
 import java.util.*
 
+private const val REQUEST_CODE_PERMISSIONS = 10
+private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+
 /** Demonstrates the barcode scanning workflow using camera preview.  */
 class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
 
@@ -58,7 +66,6 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_live_barcode_kotlin)
-        // TODO camera permission
         preview = findViewById(R.id.camera_preview)
         graphicOverlay = findViewById<GraphicOverlay>(R.id.camera_preview_graphic_overlay).apply {
             setOnClickListener(this@LiveBarcodeScanningActivity)
@@ -79,7 +86,14 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
             setOnClickListener(this@LiveBarcodeScanningActivity)
         }
 
-        setUpWorkflowModel()
+        // Request camera permissions
+        if (allPermissionsGranted()) {
+            setUpWorkflowModel()
+        } else {
+            ActivityCompat.requestPermissions(
+                    this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+            )
+        }
     }
 
     override fun onResume() {
@@ -126,6 +140,29 @@ class LiveBarcodeScanningActivity : AppCompatActivity(), OnClickListener {
             R.id.settings_button -> {
                 settingsButton?.isEnabled = false
                 startActivity(Intent(this, SettingsActivity::class.java))
+            }
+        }
+    }
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(
+                baseContext, it
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    override fun onRequestPermissionsResult(
+            requestCode: Int, permissions: Array<String>, grantResults: IntArray
+    ) {
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            if (allPermissionsGranted()) {
+                setUpWorkflowModel()
+            } else {
+                Toast.makeText(
+                        this,
+                        "Permissions not granted by the user.",
+                        Toast.LENGTH_SHORT
+                ).show()
+                finish()
             }
         }
     }
